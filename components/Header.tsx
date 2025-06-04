@@ -1,4 +1,4 @@
-import { Sparkles, Filter } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 const Header = () => {
   return (

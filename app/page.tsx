@@ -12,7 +12,7 @@ import { ChevronUp } from "lucide-react";
 
 export default function SkipSelectionPage() {
   const [selectedSkip, setSelectedSkip] = useState<string | null>("8yard");
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep] = useState(2);
   const [showMobileSummary, setShowMobileSummary] = useState(false);
   const { skips, loading } = useSkipData();
 

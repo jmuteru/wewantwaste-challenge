@@ -12,7 +12,7 @@ export function useSkipData() {
     const fetchSkips = async () => {
       try {
         setLoading(true);
-        const response = await fetch(process.env.NEXT_PUBLIC_API);
+        const response = await fetch(process.env.NEXT_PUBLIC_API as string);
 
         if (!response.ok) {
           throw new Error("Failed to fetch skip data");

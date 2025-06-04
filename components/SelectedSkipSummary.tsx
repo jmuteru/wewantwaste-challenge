@@ -1,25 +1,26 @@
-"use client"
+"use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import type { SelectedSkipSummaryProps, Skip } from "@/types/types";
+import type { SelectedSkipSummaryProps } from "@/types/types";
 import { CheckCircle, Clock, Truck, Calculator } from "lucide-react";
 import Image from "next/image";
-import { Toaster, toast } from 'sonner';
+import { Toaster, toast } from "sonner";
 
 export function SelectedSkipSummary({ skip }: SelectedSkipSummaryProps) {
   const confirmSelection = () => {
     toast.success(`${skip.name} has been selected`, {
       duration: 5000,
-      className: 'sm:min-w-[400px]',
-      position: window.innerWidth < 640 ? 'bottom-center' : 'top-left',
+      className: "sm:min-w-[400px]",
+      position: window.innerWidth < 640 ? "bottom-center" : "top-left",
       style: {
-        background: 'linear-gradient(to right, rgb(37, 99, 235), rgb(79, 70, 229))',
-        color: 'white',
-        border: '1px solid rgba(255, 255, 255, 0.2)',
+        background:
+          "linear-gradient(to right, rgb(37, 99, 235), rgb(79, 70, 229))",
+        color: "white",
+        border: "1px solid rgba(255, 255, 255, 0.2)",
       },
-    })
-  }
+    });
+  };
 
   return (
     <Card className="lg:sticky lg:top-24 bg-gradient-to-br from-slate-50 to-white backdrop-blur-xl shadow-lg border border-slate-200/50">
@@ -28,9 +29,7 @@ export function SelectedSkipSummary({ skip }: SelectedSkipSummaryProps) {
           <div className="p-2 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-500">
             <CheckCircle className="h-5 w-5 text-white" />
           </div>
-          <CardTitle className="text-lg text-black">
-            Selected Skip
-          </CardTitle>
+          <CardTitle className="text-lg text-black">Selected Skip</CardTitle>
         </div>
       </CardHeader>
 
@@ -50,12 +49,8 @@ export function SelectedSkipSummary({ skip }: SelectedSkipSummaryProps) {
         </div>
 
         <div>
-          <h3 className="font-bold text-xl text-black mb-2">
-            {skip.name}
-          </h3>
-          <p className="text-sm text-slate-700 mb-3">
-            {skip.description}
-          </p>
+          <h3 className="font-bold text-xl text-black mb-2">{skip.name}</h3>
+          <p className="text-sm text-slate-700 mb-3">{skip.description}</p>
         </div>
 
         <div className="space-y-3">
@@ -85,37 +80,32 @@ export function SelectedSkipSummary({ skip }: SelectedSkipSummaryProps) {
               <span className="text-sm text-white font-semibold">
                 Total Price
               </span>
-              <div className="text-2xl font-bold text-white">
-                £{skip.price}
-              </div>
+              <div className="text-2xl font-bold text-white">£{skip.price}</div>
             </div>
           </div>
-
         </div>
-        <div>
-        </div>
+        <div></div>
 
-        <Button 
+        <Button
           onClick={confirmSelection}
           className="hover:cursor-pointer w-full bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-700 hover:via-blue-800 hover:to-indigo-800 text-white shadow-lg"
         >
           Confirm Selection
         </Button>
-        <Toaster 
-          expand={true} 
-          richColors 
+        <Toaster
+          expand={true}
+          richColors
           closeButton
           className="sm:!top-4 sm:!right-4"
           toastOptions={{
-            className: 'sm:!w-[400px]',
+            className: "sm:!w-[400px]",
             classNames: {
-              toast: 'group',
-              title: 'group-hover:text-white/90',
-              description: 'group-hover:text-white/90',
+              toast: "group",
+              title: "group-hover:text-white/90",
+              description: "group-hover:text-white/90",
             },
           }}
         />
-
       </CardContent>
     </Card>
   );
