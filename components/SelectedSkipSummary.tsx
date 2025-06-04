@@ -15,7 +15,7 @@ export function SelectedSkipSummary({ skip }: SelectedSkipSummaryProps) {
       position: window.innerWidth < 640 ? "bottom-center" : "top-left",
       style: {
         background:
-          "linear-gradient(to right, rgb(37, 99, 235), rgb(79, 70, 229))",
+          "linear-gradient(to right, rgb(34, 197, 94), rgb(22, 163, 74))",
         color: "white",
         border: "1px solid rgba(255, 255, 255, 0.2)",
       },

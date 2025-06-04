@@ -16,17 +16,17 @@ const NavigationButtons = ({
           onClick={goBack}
           variant="outline"
           size="lg"
-          className="flex items-center gap-3 px-6 py-6 sm:py-4 border border-slate-200 hover:bg-slate-50 bg-white/80 backdrop-blur-sm w-full sm:w-auto transition-all duration-300"
+          className="flex items-center gap-3 hover:cursor-pointer   px-6 py-6 sm:py-4 border border-slate-200 hover:bg-slate-50 bg-gradient-to-r from-rose-500 to-red-600 backdrop-blur-sm w-full sm:w-auto transition-all duration-300"
         >
-          <ArrowLeft className="h-5 w-5" />
-          <span className="font-semibold">Previous Step</span>
+          <ArrowLeft className="h-5 w-5 text-white" />
+          <span className="font-semibold text-white">Previous Step</span>
         </Button>
 
         {/* Forward button */}
         <Button
           onClick={goForward}
           size="lg"
-          className={`flex items-center gap-3 px-6 py-6 sm:py-4 font-semibold transition-all duration-300 w-full sm:w-auto backdrop-blur-sm ${
+          className={`flex items-center gap-3 px-6 py-6 sm:py-4 hover:cursor-pointer hover:bg-gradient-to-r from-blue-500 to-indigo-600 font-semibold transition-all duration-300 w-full sm:w-auto backdrop-blur-sm ${
             canGoForward
               ? "bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
               : "bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200"

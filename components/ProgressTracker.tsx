@@ -4,9 +4,9 @@ import { steps } from "@/constants/constants";
 
 export function ProgressTracker({ currentStep }: ProgressBarProps) {
   return (
-    <div className="w-full">
+    <div className="w-full ">
       {/* Desktop Progress */}
-      <div className="hidden md:flex items-center justify-between mb-4">
+      <div className="hidden md:flex items-center justify-between mb-0 ">
         {steps.map((step, index) => (
           <div key={index} className="flex items-center">
             <div className="flex flex-col items-center">

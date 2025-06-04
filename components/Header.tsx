@@ -3,7 +3,7 @@ import { Sparkles } from "lucide-react";
 const Header = () => {
   return (
     <div className="mb-8">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-center mb-6">
         <div className="flex items-center gap-4">
           <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-lg">
             <Sparkles className="h-8 w-8 text-white" />
