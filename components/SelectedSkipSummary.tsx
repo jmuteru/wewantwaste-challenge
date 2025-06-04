@@ -1,19 +1,34 @@
+"use client"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { SelectedSkipSummaryProps, Skip } from "@/types/types";
 import { CheckCircle, Clock, Truck, Calculator } from "lucide-react";
 import Image from "next/image";
+import { Toaster, toast } from 'sonner';
 
 export function SelectedSkipSummary({ skip }: SelectedSkipSummaryProps) {
+  const confirmSelection = () => {
+    toast.success(`${skip.name} has been selected`, {
+      duration: 5000,
+      className: 'sm:min-w-[400px]',
+      position: window.innerWidth < 640 ? 'bottom-center' : 'top-left',
+      style: {
+        background: 'linear-gradient(to right, rgb(37, 99, 235), rgb(79, 70, 229))',
+        color: 'white',
+        border: '1px solid rgba(255, 255, 255, 0.2)',
+      },
+    })
+  }
+
   return (
-    <Card className="lg:sticky lg:top-24 gradient-dark-card backdrop-blur-xl glow glow-border hover-card">
+    <Card className="lg:sticky lg:top-24 bg-gradient-to-br from-slate-50 to-white backdrop-blur-xl shadow-lg border border-slate-200/50">
       <CardHeader className="pb-4">
         <div className="flex items-center gap-2 mb-2">
-          <div className="p-2 rounded-lg bg-emerald-500/10">
-            <CheckCircle className="h-5 w-5 text-emerald-400" />
+          <div className="p-2 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-500">
+            <CheckCircle className="h-5 w-5 text-white" />
           </div>
-          <CardTitle className="text-lg text-slate-100">
+          <CardTitle className="text-lg text-black">
             Selected Skip
           </CardTitle>
         </div>
@@ -22,64 +37,85 @@ export function SelectedSkipSummary({ skip }: SelectedSkipSummaryProps) {
       <CardContent className="space-y-4">
         <div className="relative overflow-hidden rounded-xl">
           <Image
-            src={skip.imageUrl || "/placeholder.svg"}
+            src={skip.imageUrl || "/placeholder.svg"} //incase an image is missing
             alt={skip.name}
             width={300}
             height={150}
             className="w-full h-32 object-cover hover:scale-110 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-          <Badge className="absolute top-2 right-2 bg-blue-500/90 text-white backdrop-blur-sm">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <Badge className="absolute top-2 right-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white backdrop-blur-sm">
             {skip.size}
           </Badge>
         </div>
 
         <div>
-          <h3 className="font-bold text-xl text-slate-100 mb-2">
+          <h3 className="font-bold text-xl text-black mb-2">
             {skip.name}
           </h3>
-          <p className="text-sm text-slate-400 mb-3">
+          <p className="text-sm text-slate-700 mb-3">
             {skip.description}
           </p>
         </div>
 
         <div className="space-y-3">
-          <div className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg backdrop-blur-sm border border-slate-700/50">
-            <div className="p-1.5 bg-blue-500/10 rounded-lg">
-              <Clock className="h-4 w-4 text-blue-400" />
+          <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg backdrop-blur-sm border border-white/20">
+            <div className="p-1.5 bg-white/10 rounded-lg">
+              <Clock className="h-4 w-4 text-white font-bold" />
             </div>
-            <span className="text-sm font-medium text-slate-300">
+            <span className="text-sm text-white font-semibold">
               {skip.hirePeriod}
             </span>
           </div>
 
-          <div className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg backdrop-blur-sm border border-slate-700/50">
-            <div className="p-1.5 bg-blue-500/10 rounded-lg">
-              <Truck className="h-4 w-4 text-blue-400" />
+          <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-rose-500 to-red-600 rounded-lg backdrop-blur-sm border border-white/20">
+            <div className="p-1.5 bg-white/10 rounded-lg">
+              <Truck className="h-4 w-4 text-white font-bold" />
             </div>
-            <span className="text-sm font-medium text-slate-300">
+            <span className="text-sm text-white font-semibold">
               Free delivery & collection
             </span>
           </div>
 
-          <div className="flex items-center gap-3 p-3 bg-emerald-950/30 rounded-lg backdrop-blur-sm border border-emerald-800/50">
-            <div className="p-1.5 bg-emerald-500/10 rounded-lg">
-              <Calculator className="h-4 w-4 text-emerald-400" />
+          <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-lg backdrop-blur-sm border border-white/20">
+            <div className="p-1.5 bg-white/10 rounded-lg">
+              <Calculator className="h-4 w-4 text-white" />
             </div>
             <div className="flex-1">
-              <span className="text-sm text-emerald-300">
+              <span className="text-sm text-white font-semibold">
                 Total Price
               </span>
-              <div className="text-2xl font-bold text-emerald-400">
+              <div className="text-2xl font-bold text-white">
                 £{skip.price}
               </div>
             </div>
           </div>
+
+        </div>
+        <div>
         </div>
 
-        <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg button-glow">
+        <Button 
+          onClick={confirmSelection}
+          className="hover:cursor-pointer w-full bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-700 hover:via-blue-800 hover:to-indigo-800 text-white shadow-lg"
+        >
           Confirm Selection
         </Button>
+        <Toaster 
+          expand={true} 
+          richColors 
+          closeButton
+          className="sm:!top-4 sm:!right-4"
+          toastOptions={{
+            className: 'sm:!w-[400px]',
+            classNames: {
+              toast: 'group',
+              title: 'group-hover:text-white/90',
+              description: 'group-hover:text-white/90',
+            },
+          }}
+        />
+
       </CardContent>
     </Card>
   );
