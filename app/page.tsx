@@ -8,13 +8,12 @@ import { SkipSizeGuide } from "@/components/skip/SkipSizeGuide";
 import NavigationButtons from "@/components/NavigationButtons";
 import { useSkipData } from "@/hooks/UseSkipData";
 import { SelectedSkipSummary } from "@/components/SelectedSkipSummary";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ChevronUp } from "lucide-react";
 
 export default function SkipSelectionPage() {
   const [selectedSkip, setSelectedSkip] = useState<string | null>("8yard");
   const [currentStep, setCurrentStep] = useState(2);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showMobileSummary, setShowMobileSummary] = useState(false);
   const { skips, loading } = useSkipData();
 
   const selectedSkipData = skips.find((skip) => skip.id === selectedSkip);
@@ -27,68 +26,84 @@ export default function SkipSelectionPage() {
     alert("Going back to previous step");
   };
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+  const toggleMobileSummary = () => {
+    setShowMobileSummary(!showMobileSummary);
   };
 
   return (
-    <div className="min-h-screen gradient-dark-1 dark:text-slate-100">
-      {/* Top Navigation Bar */}
-      <div className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 dark:bg-slate-900/20 border-b border-slate-200/50 dark:border-slate-700/20">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+      {/* Progress Tracker */}
+      <div className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
           <ProgressTracker currentStep={currentStep} />
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <div className="grid grid-cols-12 gap-6 lg:gap-8">
-          {/* Mobile Menu Toggle */}
-          <div className="col-span-12 flex lg:hidden justify-end">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={toggleMobileMenu}
-              className="relative z-50 dark:border-slate-700/50 dark:bg-slate-800/50 dark:hover:bg-slate-700/50 backdrop-blur-hover"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </Button>
-          </div>
+        {/* Header Section */}
+        <div className="mb-8">
+          <Header />
+        </div>
 
-          {/* Main Content - Skip Selection */}
-          <div className="col-span-12 lg:col-span-8">
-            <Header />
-            <div className="mb-8">
+        {/* Main Content Area */}
+        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+          {/* Left Column - Skip Selection */}
+          <div className="lg:col-span-8 mb-8 lg:mb-0">
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
               <SkipGrid
                 skips={skips}
                 selectedSkip={selectedSkip}
-                onSelectSkip={setSelectedSkip}
+                onSelectSkip={(id) => {
+                  setSelectedSkip(id);
+                  setShowMobileSummary(true);
+                }}
                 loading={loading}
               />
             </div>
           </div>
 
-          {/* Right Sidebar - Summary & Guide */}
-          <div
-            className={`fixed inset-0 lg:relative lg:col-span-4 z-40 transform transition-transform duration-300 ease-in-out lg:transform-none ${
-              isMobileMenuOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"
-            }`}
-          >
-            <div className="h-full lg:h-auto overflow-y-auto custom-scrollbar dark:bg-slate-900/95 backdrop-blur-xl lg:bg-transparent p-6 lg:p-0 pt-20 lg:pt-0">
-              <div className="space-y-6">
-                {/* Selected Skip Summary */}
-                {selectedSkipData && (
-                  <SelectedSkipSummary skip={selectedSkipData} />
-                )}
+          {/* Right Column - Summary & Guide */}
+          <div className="hidden lg:block lg:col-span-4 space-y-6">
+            {selectedSkipData && (
+              <SelectedSkipSummary skip={selectedSkipData} />
+            )}
+            <SkipSizeGuide />
+          </div>
+        </div>
 
-                {/* Size Guide */}
-                <SkipSizeGuide />
+        {/* Mobile Summary Drawer */}
+        <div className="lg:hidden">
+          {selectedSkipData && (
+            <div
+              className={`fixed inset-x-0 bottom-0 z-40 transform transition-transform duration-300 ease-in-out ${
+                showMobileSummary ? "translate-y-0" : "translate-y-full"
+              }`}
+            >
+              <div className="relative">
+                {/* Drawer Handle */}
+                <button
+                  onClick={toggleMobileSummary}
+                  className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border border-slate-200"
+                >
+                  <ChevronUp
+                    className={`h-6 w-6 text-slate-600 transition-transform duration-300 ${
+                      showMobileSummary ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {/* Drawer Content */}
+                <div className="bg-white rounded-t-3xl shadow-lg">
+                  <div className="max-h-[70vh] overflow-y-auto custom-scrollbar px-4 pt-8 pb-24">
+                    <div className="max-w-lg mx-auto space-y-6">
+                      <SelectedSkipSummary skip={selectedSkipData} />
+                      <SkipSizeGuide />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Bottom Navigation */}

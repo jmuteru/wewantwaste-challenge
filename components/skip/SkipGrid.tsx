@@ -12,7 +12,7 @@ export function SkipGrid({
 }: SkipGridProps) {
   if (loading) {
     return (
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div className="">
         {[...Array(6)].map((_, i) => (
           <SkipCardFrame key={i} />
         ))}
@@ -21,7 +21,7 @@ export function SkipGrid({
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-6">
       {skips.map((skip) => (
         <SkipCard
           key={skip.id}
