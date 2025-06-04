@@ -30,3 +30,7 @@ export interface SkipGridProps {
   onSelectSkip: (skipId: string) => void;
   loading: boolean;
 }
+
+export interface SelectedSkipSummaryProps {
+  skip: Skip;
+}
