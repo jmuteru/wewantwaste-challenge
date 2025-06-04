@@ -3,11 +3,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { SelectedSkipSummaryProps } from "@/types/types";
-import { CheckCircle, Clock, Truck, Calculator } from "lucide-react";
+import { CheckCircle, Clock, Truck, Calculator, ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { Toaster, toast } from "sonner";
+import { useState } from "react";
 
 export function SelectedSkipSummary({ skip }: SelectedSkipSummaryProps) {
+  const [imageError, setImageError] = useState(false);
+
   const confirmSelection = () => {
     toast.success(`${skip.name} has been selected`, {
       duration: 5000,
@@ -22,6 +25,9 @@ export function SelectedSkipSummary({ skip }: SelectedSkipSummaryProps) {
     });
   };
 
+  // Default image if none provided or error loading
+  const defaultImage = "/placeholder.svg";
+
   return (
     <Card className="lg:sticky lg:top-24 bg-gradient-to-br from-slate-50 to-white backdrop-blur-xl shadow-lg border border-slate-200/50">
       <CardHeader className="pb-4">
@@ -34,15 +40,26 @@ export function SelectedSkipSummary({ skip }: SelectedSkipSummaryProps) {
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <div className="relative overflow-hidden rounded-xl">
-          <Image
-            src={skip.imageUrl || "/placeholder.svg"} //incase an image is missing
-            alt={skip.name}
-            width={300}
-            height={150}
-            className="w-full h-32 object-cover hover:scale-110 transition-transform duration-500"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        <div className="relative overflow-hidden rounded-xl bg-slate-100">
+          {imageError ? (
+            <div className="w-full h-32 flex items-center justify-center bg-slate-100">
+              <ImageIcon className="h-8 w-8 text-slate-400" />
+            </div>
+          ) : (
+            <>
+              <Image
+                src={skip.imageUrl || defaultImage}
+                alt={skip.name}
+                width={400}
+                height={200}
+                className="w-full h-32 object-cover hover:scale-110 transition-transform duration-500"
+                onError={() => setImageError(true)}
+                priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+            </>
+          )}
           <Badge className="absolute top-2 right-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white backdrop-blur-sm">
             {skip.size}
           </Badge>
