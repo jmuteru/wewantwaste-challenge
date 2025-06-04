@@ -31,15 +31,6 @@ export const sizeGuides = [
   },
 ];
 
-// export const images = {
-//   img1: "https://raw.githubusercontent.com/jmuteru/wewantwaste-challenge/final-styling/public/dumpster1.jpg",
-//   img2: "https://raw.githubusercontent.com/jmuteru/wewantwaste-challenge/final-styling/public/dumpster2.jpg",
-//   img3: "https://raw.githubusercontent.com/jmuteru/wewantwaste-challenge/final-styling/public/dumpster3.jpg",
-//   img4: "https://raw.githubusercontent.com/jmuteru/wewantwaste-challenge/final-styling/public/dumpster4.jpg",
-//   img5: "https://raw.githubusercontent.com/jmuteru/wewantwaste-challenge/final-styling/public/dumpster5.jpg",
-//   img6: "https://raw.githubusercontent.com/jmuteru/wewantwaste-challenge/final-styling/public/dumpster6.jpg",
-// };
-
 export const images = {
   img1: "/images/dumpster1.jpg",
   img2: "/images/dumpster2.jpg",

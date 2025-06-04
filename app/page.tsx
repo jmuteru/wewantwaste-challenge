@@ -10,10 +10,9 @@ import { useSkipData } from "@/hooks/UseSkipData";
 import { SelectedSkipSummary } from "@/components/SelectedSkipSummary";
 import { ChevronUp } from "lucide-react";
 
-
 export default function SkipSelectionPage() {
   const [selectedSkip, setSelectedSkip] = useState<string | null>("8yard");
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep] = useState(2);
   const [showMobileSummary, setShowMobileSummary] = useState(false);
   const { skips, loading } = useSkipData();
 
@@ -33,7 +32,6 @@ export default function SkipSelectionPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-
       {/* Progress Tracker */}
       <div className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
