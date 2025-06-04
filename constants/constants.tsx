@@ -31,6 +31,8 @@ export const sizeGuides = [
   },
 ];
 
+
+
 export const images = {
   img1: "/images/dumpster1.jpg",
   img2: "/images/dumpster2.jpg",

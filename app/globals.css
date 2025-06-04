@@ -77,9 +77,7 @@
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
 }
-h1,div {
-  font-family: var(--font-bebas-neue);
-}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
