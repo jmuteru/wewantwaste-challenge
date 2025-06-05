@@ -12,18 +12,24 @@ import { ChevronUp } from "lucide-react";
 
 export default function SkipSelectionPage() {
   const [selectedSkip, setSelectedSkip] = useState<string | null>("8yard");
-  const [currentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(2);
   const [showMobileSummary, setShowMobileSummary] = useState(false);
   const { skips, loading } = useSkipData();
 
   const selectedSkipData = skips.find((skip) => skip.id === selectedSkip);
 
   const handleForward = () => {
+    if (!selectedSkip) return;
     alert(`Selected skip: ${selectedSkip}`);
   };
 
   const handleBack = () => {
     alert("Going back to previous step");
+  };
+
+  const handleDeselect = () => {
+    setSelectedSkip(null);
+    setShowMobileSummary(false);
   };
 
   const toggleMobileSummary = () => {
@@ -41,7 +47,7 @@ export default function SkipSelectionPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {/* Header Section */}
-        <div className="mb-8 ">
+        <div className="mb-8">
           <Header />
         </div>
 
@@ -65,7 +71,10 @@ export default function SkipSelectionPage() {
           {/* Right Column - Summary & Guide */}
           <div className="hidden lg:block lg:col-span-4 space-y-6">
             {selectedSkipData && (
-              <SelectedSkipSummary skip={selectedSkipData} />
+              <SelectedSkipSummary 
+                skip={selectedSkipData} 
+                onDeselect={handleDeselect}
+              />
             )}
             <SkipSizeGuide />
           </div>
@@ -96,7 +105,10 @@ export default function SkipSelectionPage() {
                 <div className="bg-white rounded-t-3xl shadow-lg">
                   <div className="max-h-[70vh] overflow-y-auto custom-scrollbar px-4 pt-8 pb-24">
                     <div className="max-w-lg mx-auto space-y-6">
-                      <SelectedSkipSummary skip={selectedSkipData} />
+                      <SelectedSkipSummary 
+                        skip={selectedSkipData}
+                        onDeselect={handleDeselect}
+                      />
                       <SkipSizeGuide />
                     </div>
                   </div>
