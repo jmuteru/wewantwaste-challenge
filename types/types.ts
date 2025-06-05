@@ -15,7 +15,7 @@ export interface Skip {
   price: number;
   hirePeriod: string;
   description: string;
-  imageUrl: string;
+  imageUrl?: string;
 }
 
 export interface SkipCardProps {
@@ -27,10 +27,11 @@ export interface SkipCardProps {
 export interface SkipGridProps {
   skips: Skip[];
   selectedSkip: string | null;
-  onSelectSkip: (skipId: string) => void;
-  loading: boolean;
+  onSelectSkip: (id: string) => void;
+  loading?: boolean;
 }
 
 export interface SelectedSkipSummaryProps {
   skip: Skip;
+  onDeselect: () => void;
 }
