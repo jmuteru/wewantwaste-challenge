@@ -31,8 +31,6 @@ export const sizeGuides = [
   },
 ];
 
-
-
 export const images = {
   img1: "/images/dumpster1.jpg",
   img2: "/images/dumpster2.jpg",
@@ -41,3 +39,5 @@ export const images = {
   img5: "/images/dumpster5.jpg",
   img6: "/images/dumpster6.jpg",
 };
+export const API =
+  "https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft";

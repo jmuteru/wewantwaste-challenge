@@ -2,18 +2,21 @@
 
 import { useState, useEffect } from "react";
 import { Skip } from "@/types/types";
-import { images } from "@/constants/constants";
+import { API, images } from "@/constants/constants";
 
 export function useSkipData() {
   const [skips, setSkips] = useState<Skip[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { img1, img2, img3, img4, img5, img6 } = images;
+
   useEffect(() => {
     const fetchSkips = async () => {
       try {
         setLoading(true);
-        const response = await fetch(process.env.NEXT_PUBLIC_API as string);
+        const response = await fetch(
+          (process.env.NEXT_PUBLIC_API as string) || API,
+        ); // TODO: .env is preferred in prod
         console.log(process.env.NEXT_PUBLIC_API);
 
         if (!response.ok) {
