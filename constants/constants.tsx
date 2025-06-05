@@ -30,3 +30,14 @@ export const sizeGuides = [
     description: "Suitable for commercial projects and major construction work",
   },
 ];
+
+
+
+export const images = {
+  img1: "/images/dumpster1.jpg",
+  img2: "/images/dumpster2.jpg",
+  img3: "/images/dumpster3.jpg",
+  img4: "/images/dumpster4.jpg",
+  img5: "/images/dumpster5.jpg",
+  img6: "/images/dumpster6.jpg",
+};

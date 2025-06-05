@@ -2,17 +2,19 @@
 
 import { useState, useEffect } from "react";
 import { Skip } from "@/types/types";
+import { images } from "@/constants/constants";
 
 export function useSkipData() {
   const [skips, setSkips] = useState<Skip[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  const { img1, img2, img3, img4, img5, img6 } = images;
   useEffect(() => {
     const fetchSkips = async () => {
       try {
         setLoading(true);
-        const response = await fetch(process.env.NEXT_PUBLIC_API);
+        const response = await fetch(process.env.NEXT_PUBLIC_API as string);
+        console.log(process.env.NEXT_PUBLIC_API);
 
         if (!response.ok) {
           throw new Error("Failed to fetch skip data");
@@ -29,7 +31,7 @@ export function useSkipData() {
             price: 227,
             hirePeriod: "7 day hire period",
             description: "Ideal for small home projects and garden waste",
-            imageUrl: "/dumpster1.jpg",
+            imageUrl: img1,
           },
           {
             id: "6yard",
@@ -38,7 +40,7 @@ export function useSkipData() {
             price: 300,
             hirePeriod: "14 day hire period",
             description: "Perfect for medium renovation projects",
-            imageUrl: "/dumpster2.jpg",
+            imageUrl: img2,
           },
           {
             id: "8yard",
@@ -47,7 +49,7 @@ export function useSkipData() {
             price: 325,
             hirePeriod: "7 day hire period",
             description: "Great for larger home renovations",
-            imageUrl: "/dumpster3.jpg",
+            imageUrl: img3,
           },
           {
             id: "10yard",
@@ -56,7 +58,7 @@ export function useSkipData() {
             price: 375,
             hirePeriod: "7 day hire period",
             description: "Suitable for major renovation work",
-            imageUrl: "/dumpster4.jpg",
+            imageUrl: img4,
           },
           {
             id: "12yard",
@@ -65,7 +67,7 @@ export function useSkipData() {
             price: 425,
             hirePeriod: "7 day hire period",
             description: "For commercial projects and large clearances",
-            imageUrl: "/dumpster5.jpg",
+            imageUrl: img5,
           },
           {
             id: "14yard",
@@ -74,7 +76,7 @@ export function useSkipData() {
             price: 475,
             hirePeriod: "7 day hire period",
             description: "Our largest skip for major construction work",
-            imageUrl: "/dumpster6.jpg",
+            imageUrl: img6,
           },
         ];
 
